@@ -11,12 +11,12 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="kilograms" class="col-md-4 col-form-label text-md-end">{{ __('Kilograms') }}</label>
+                            <label for="weight" class="col-md-4 col-form-label text-md-end">{{ __('Weight') }}</label>
 
                             <div class="col-md-6">
-                                <input id="kilograms" type="number" min="40" step="0.01" class="form-control @error('kilograms') is-invalid @enderror" name="kilograms" value="{{ old('kilograms') }}" required autocomplete="kilograms" autofocus>
+                                <input id="weight" type="number" min="40" step="0.01" class="form-control @error('weight') is-invalid @enderror" name="weight" value="{{ old('weight') }}" required autocomplete="weight" autofocus>
 
-                                @error('kilograms')
+                                @error('weight')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

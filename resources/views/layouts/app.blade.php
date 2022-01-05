@@ -117,7 +117,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-10">
                         <div class="card mb-4">
-                        <div class="card-body">
+                        <div class="card-body shadow-lg">
                         <div class="jumbotron text-center">
                           <h2>Days before you turn 30 years old:</h2>
                           <strong><h1>{{session('daysToThirties')}}</h1></strong>

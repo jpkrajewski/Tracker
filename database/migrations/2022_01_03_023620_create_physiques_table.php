@@ -18,8 +18,8 @@ class CreatePhysiquesTable extends Migration
             $table->bigInteger('user_id')->unsigned();
 
             $table->float('weight')->nullable();
-            $table->integer('deadlift')->nullable();
             $table->integer('benchpress')->nullable();
+            $table->integer('deadlift')->nullable();
             $table->integer('squat')->nullable();
             $table->string('comment')->nullable();
 

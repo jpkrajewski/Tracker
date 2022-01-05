@@ -4,11 +4,18 @@
 
             <div class="row justify-content-center">
                 <div class="col-md-10">
-                	<div class="card">
+                	<div class="card shadow-lg">
                         <div class="card-header">
                          <h2>Progress stats</h2>	
                      </div>
                      <div class="card-body">
+
+                      @if(is_null($recentReport))
+
+                      <p>Too little workouts to create stats...</p>
+
+                      @else
+
                       <table class="table">
                           <thead>
                             <tr>
@@ -35,42 +42,48 @@
                             <td>{{$previousPhysique->created_at->format('d-m-Y')}}</td>
                         </tr>
                         <tr>
-                          @foreach($report as $value)
+                          @foreach($recentReport as $value)
                           <td>{{$value}}</td>
                           @endforeach
                       </tr>
                   </tbody>
               </table>
+
+              @endif
+
           </div>
       </div>
   </div>
 </div>
 
 <div class="row justify-content-center mt-4">
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-header">
+    <div class="col-md-4">
+      <div class="card shadow-lg bg-warning">
+        <div class="card-header ">
           <h2>Personal records</h2>	
       </div>
       <div class="card-body">
-          <p>Height</p>
-          <p>Wieght</p>
-          <p>Bmi</p>
-          <p>squat</p>
-          <p></p>
-          <p></p>
+          <p><b>Benchpress:  {{$personalRecords['benchpress']}}</b></p>
+          <p><b>Deadlift:    {{$personalRecords['deadlift']}}</b></p>
+          <p><b>Squat:       {{$personalRecords['squat']}}</b></p>
       </div>
   </div>
 </div>	
 
 
 
-<div class="col-md-5">
-   <div class="card">
+<div class="col-md-6">
+   <div class="card shadow-lg">
     <div class="card-header">
         <h2>Saved workouts</h2> 
     </div>
     <div class="card-body">
+
+    @if($physiques->isEmpty())
+
+    <p>No workouts. Go to gym.</p>
+
+    @else
      <table class="table">
       <thead>
         <tr>
@@ -90,6 +103,9 @@
   @endforeach
 </tbody>
 </table>
+
+@endif
+
 </div>
 </div>
 </div>

@@ -10,43 +10,35 @@ use App\Services\PhysiqueProgressService;
 
 class PhysiqueController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $physiqueProgressService;
+
+    public function __construct(PhysiqueProgressService $service)
+    {
+        $this->physiqueProgressService = $service;
+    }
+    
     public function index()
     {
+        $user = auth()->user();
 
-        $report = PhysiqueProgressService::getPhysiqueProgress(auth()->user()->id);
-
-        $physiques = auth()->user()->physiques->reverse();
+        $physiques = $user->physiques->reverse();
         $latestPhysique = $physiques->first();
-        
+
         return view('physiques.index', [
             'physiques' => $physiques,
             'latestPhysique' => $latestPhysique,
-            'previousPhysique' => $physiques->get(1),
-            'report' => $report,
+            'previousPhysique' => $physiques->get(0),
+            'recentReport' => $this->physiqueProgressService->getRecentProgress($user->id),
+            'personalRecords' => $this->physiqueProgressService->getPersonalRecords($user->id),
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         return view('physiques.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorePhysiqueRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StorePhysiqueRequest $request)
     {
         $physique = $request->validated();
@@ -63,15 +55,9 @@ class PhysiqueController extends Controller
             }
          }
 
-        return view('physiques.index')->withSuccess('Physique progress saved. Stay grinding.');
+        return redirect()->route('physiques.index')->withSuccess('Physique progress saved. Stay grinding.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Physique  $physique
-     * @return \Illuminate\Http\Response
-     */
     public function show(Physique $physique)
     {
         return view('physiques.show', [
@@ -79,35 +65,16 @@ class PhysiqueController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Physique  $physique
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Physique $physique)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePhysiqueRequest  $request
-     * @param  \App\Models\Physique  $physique
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdatePhysiqueRequest $request, Physique $physique)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Physique  $physique
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Physique $physique)
     {
         //

@@ -6,20 +6,24 @@ use App\Models\Physique;
 
 class PhysiqueProgressService
 {
-	public static function getPhysiqueProgress(int $userId)
+	private $strenghAttributes = array('weight' => 0,'benchpress' => 0,'deadlift' => 0,'squat' => 0);
+
+	public function getRecentProgress(int $userId)
 	{
 		$reports = Physique::
-						select('kilograms','benchpress','deadlift','squat')
-						->where('user_id', $userId)
-						->orderBy('created_at','desc')
+						userStrengh($userId)
 						->take(2)
-						->get();
+						->get();						
+
+		if ($reports->count() < 2)
+		{
+			return null;
+		}
 
 		$latestReport = $reports[0]->getAttributes();
 		$previousReport = $reports[1]->getAttributes();
 
-		$progress = array_fill_keys(
-  			array('kilograms','benchpress','deadlift','squat'), 0);
+		$progress = array_merge(array(), $this->strenghAttributes);
 
 		foreach($latestReport as $key => $value){
     		$progress[$key] = $value - $previousReport[$key];
@@ -28,8 +32,16 @@ class PhysiqueProgressService
 		return $progress;
 	}
 
-	public static function getPersonalRecords(int $userId)
+	public function getPersonalRecords(int $userId)
 	{
-		
+		$data = Physique::userStrengh($userId)->get();
+
+		$prArray = array_merge(array(), $this->strenghAttributes);
+
+		$prArray['benchpress'] = $data->max('benchpress');
+		$prArray['deadlift'] =$data->max('deadlift');
+		$prArray['squat'] =$data->max('squat');
+
+		return $prArray;
 	}
 }

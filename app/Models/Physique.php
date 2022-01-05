@@ -32,4 +32,11 @@ class Physique extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeUserStrengh($query, $userId)
+    {
+        return $query->select('weight','benchpress','deadlift','squat')
+                        ->where('user_id', $userId)
+                        ->orderBy('created_at','desc');
+    }
 }

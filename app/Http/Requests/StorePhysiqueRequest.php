@@ -24,9 +24,9 @@ class StorePhysiqueRequest extends FormRequest
     public function rules()
     {
         return [
-            'kilograms' => 'required',
-            'deadlift' => 'nullable',
+            'weight' => 'required',
             'benchpress' => 'nullable',
+            'deadlift' => 'nullable',
             'squat' => 'nullable',
             'comment' => 'required',
             'physique' => 'required',
