@@ -20,6 +20,7 @@ class PhysiqueController extends Controller
     public function index()
     {
         $user = auth()->user();
+        $id = $user->id;
 
         $physiques = $user->physiques->reverse();
         $latestPhysique = $physiques->first();
@@ -27,9 +28,11 @@ class PhysiqueController extends Controller
         return view('physiques.index', [
             'physiques' => $physiques,
             'latestPhysique' => $latestPhysique,
-            'previousPhysique' => $physiques->get(0),
-            'recentReport' => $this->physiqueProgressService->getRecentProgress($user->id),
-            'personalRecords' => $this->physiqueProgressService->getPersonalRecords($user->id),
+            'previousPhysique' => $physiques->skip(1)->first(),
+            'recentReport' => $this->physiqueProgressService->getRecentProgress($id),
+            'weeklyReport' => $this->physiqueProgressService->getWeeklyProgress($id),
+            'monthlyReport' => $this->physiqueProgressService->getMonthlyProgress($id),
+            'personalRecords' => $this->physiqueProgressService->getPersonalRecords($id),
         ]);
     }
 
@@ -47,13 +50,12 @@ class PhysiqueController extends Controller
         $physiqueModel = Physique::create($physique);
 
         if($request->hasfile('physique'))
-         {
-
+        {
             foreach($request->file('physique') as $image)
             {
                 $physiqueModel->images()->create(['path' => $image->store('physiques', 'images')]);  
             }
-         }
+        }
 
         return redirect()->route('physiques.index')->withSuccess('Physique progress saved. Stay grinding.');
     }

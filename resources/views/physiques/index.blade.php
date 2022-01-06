@@ -24,6 +24,7 @@
                               <th scope="col">Deadlift</th>
                               <th scope="col">Squat</th>
                               <th scope="col">Date</th>
+                              <th scope="col">Progress</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -32,20 +33,43 @@
                             <td>{{$latestPhysique->benchpress}}</td>
                             <td>{{$latestPhysique->deadlift}}</td>
                             <td>{{$latestPhysique->squat}}</td>
-                            <td>{{$latestPhysique->created_at->format('d-m-Y')}}</td>
+                            <td>{{$latestPhysique->created_at}}</td>
                         </tr>
                         <tr>
                             <td>{{$previousPhysique->weight}}</td>
                             <td>{{$previousPhysique->benchpress}}</td>
                             <td>{{$previousPhysique->deadlift}}</td>
                             <td>{{$previousPhysique->squat}}</td>
-                            <td>{{$previousPhysique->created_at->format('d-m-Y')}}</td>
+                            <td>{{$previousPhysique->created_at}}</td>
                         </tr>
                         <tr>
                           @foreach($recentReport as $value)
                           <td>{{$value}}</td>
                           @endforeach
+                          <td>Recent</td>
                       </tr>
+
+                      @if($weeklyReport)
+
+                      <tr>
+                          @foreach($weeklyReport as $value)
+                          <td>{{$value}}</td>
+                          @endforeach
+                          <td>Weekly</td>
+                      </tr>
+
+                      @endif
+
+                      @if($monthlyReport)
+
+                      <tr>
+                          @foreach($monthlyReport as $value)
+                          <td>{{$value}}</td>
+                          @endforeach
+                          <td>Monthly</td>
+                      </tr>
+
+                      @endif
                   </tbody>
               </table>
 
@@ -70,18 +94,17 @@
   </div>
 </div>	
 
-
-
 <div class="col-md-6">
    <div class="card shadow-lg">
     <div class="card-header">
-        <h2>Saved workouts</h2> 
+        <h2>Saved workouts</h2>
+        <a class="btn btn-primary" href="{{ route('physiques.create') }}">Add latest workout</a> 
     </div>
     <div class="card-body">
 
     @if($physiques->isEmpty())
 
-    <p>No workouts. Go to gym.</p>
+    <p>No workouts. Go to the gym.</p>
 
     @else
      <table class="table">
@@ -96,11 +119,12 @@
 
     @foreach ($physiques as $physique)
     <tr>
-        <td>{{$physique->created_at->format('d-m-Y')}}</td>
+        <td>{{$physique->created_at}}</td>
         <td>{{$physique->comment}}</td>
         <td><a class="btn btn-primary" href="{{ route('physiques.show', ['physique' => $physique->id]) }}">Show</a></td>
     </tr>
   @endforeach
+
 </tbody>
 </table>
 

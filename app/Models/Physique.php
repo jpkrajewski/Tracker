@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\CarbonImmutable;
 use Carbon\Carbon;
 
 class Physique extends Model
@@ -35,8 +36,18 @@ class Physique extends Model
 
     public function scopeUserStrengh($query, $userId)
     {
-        return $query->select('weight','benchpress','deadlift','squat')
+        return $query->select('weight','benchpress','deadlift','squat','created_at')
                         ->where('user_id', $userId)
                         ->orderBy('created_at','desc');
+    }
+
+    public function scopeEstimateDays($query, int $getBetweenFromDay)
+    {
+        return $query->whereBetween('created_at', [CarbonImmutable::now()->sub($getBetweenFromDay - 4, 'day'), CarbonImmutable::now()->sub($getBetweenFromDay + 2, 'day')]);
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
     }
 }

@@ -91,7 +91,7 @@
                 </div>
             </div>
         </nav>
-        <main class="py-4  bg-secondary">
+        <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">
                 <div class="col-md-10">
@@ -117,16 +117,16 @@
                 <div class="row justify-content-center">
                     <div class="col-md-10">
                         <div class="card mb-4">
-                        <div class="card-body shadow-lg">
+                        <div class="card-body shadow-sm">
                         <div class="jumbotron text-center">
                           <h2>Days before you turn 30 years old:</h2>
                           <strong><h1>{{session('daysToThirties')}}</h1></strong>
                           <p class="lead text-muted">,,{{session('quotes')[rand(0,49)]['q'] ?? 'Be gigachad.'}}''</p>
                           <hr class="my-4">
-                          <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" style="width: {{ session('lifePercentUsed') }}%" role="progressbar"><strong>{{session('daysSinceBirth')}}</strong> 
+                          <div class="progress mb-3" style="height: 30px;">
+                                <div class="progress-bar bg-danger" style="width: {{ session('lifePercentUsed') }}%" role="progressbar"><strong>{{session('daysSinceBirth')}} days passed since your birth.</strong> 
                                 </div>
-                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ session('lifePercentRest') }}%" > <strong>{{session('daysToThirties')}}</strong>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ session('lifePercentRest') }}%" > <strong>{{session('daysToThirties')}} left.</strong>
                                 </div>
                             </div>
                         </div>
