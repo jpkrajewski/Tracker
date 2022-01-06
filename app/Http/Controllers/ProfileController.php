@@ -18,33 +18,6 @@ class ProfileController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreProfileRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreProfileRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
     public function show(Profile $profile)
     {
         return view('profiles.show');

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Tracker') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -57,9 +57,6 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('physiques.index') }}">{{ __('Physique') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('women.index') }}">{{ __('Women') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('posts.index') }}">{{ __('Notes') }}</a>

@@ -10,17 +10,11 @@ use Illuminate\Support\Facades\Http;
 
 class PostController extends Controller
 {   
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     public function index()
     {
-
         $now = CarbonImmutable::now();
         $todayPost = Post::whereBetween('created_at', [$now->startOfDay(), $now->endOfDay()])->first();
-        //dd($todayPost);
         return view('posts.index', [
             'posts' => Post::orderBy('created_at')->get(),
             'todayPost' => $todayPost,
@@ -34,8 +28,6 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-
-        dump($post->notes);
         return view('posts.show', [
             'post' => $post,
             'notes' => $post->notes->reverse(),

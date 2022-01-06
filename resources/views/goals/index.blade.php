@@ -43,8 +43,8 @@
                                     <form method="POST" action="{{ route('goals.update', ['goal' => $goal->id]) }}">
                                         @csrf
                                         @method('PUT')
-                                        <input value="pussy" name="status" hidden>
-                                        <button class="btn btn-danger mt-3" type="submit">I'm pussy</button>
+                                        <input value="canceled" name="status" hidden>
+                                        <button class="btn btn-danger mt-3" type="submit">Cancel.</button>
                                     </form>
                                 </td>
                             </tr>
@@ -84,7 +84,7 @@
         <div class="col-5">
             <div class="card mt-4 bg-danger text-white">
                 <div class="card-header">
-                   Pussied out
+                   Canceled goals
                 </div>
                 <div class="card-body">
                     <table class="table text-white">

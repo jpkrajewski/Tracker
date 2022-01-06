@@ -87,9 +87,28 @@
           <h2>Personal records</h2>	
       </div>
       <div class="card-body">
-          <p><b>Benchpress:  {{$personalRecords['benchpress']}}</b></p>
-          <p><b>Deadlift:    {{$personalRecords['deadlift']}}</b></p>
-          <p><b>Squat:       {{$personalRecords['squat']}}</b></p>
+        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Exercise</th>
+                              <th scope="col">Weigth</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td>Benchpress</td>
+                            <td><b>{{$personalRecords['benchpress']}}</b></td>
+                        </tr>
+                        <tr>
+                            <td>Deadlift</td>    
+                            <td><b>{{$personalRecords['deadlift']}}</b></td>
+                          </tr>
+                          <tr>
+                            <td>Squat</td>       
+                            <td><b>{{$personalRecords['squat']}}</b></td>
+                        </tr>
+                      </tbody>
+                    </table>
       </div>
   </div>
 </div>	
