@@ -9,6 +9,10 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+    ];
+
     public function notes()
     {
         return $this->hasMany(Note::class);

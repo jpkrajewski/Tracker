@@ -24,10 +24,10 @@ class StorePhysiqueRequest extends FormRequest
     public function rules()
     {
         return [
-            'weight' => 'required',
-            'benchpress' => 'nullable',
-            'deadlift' => 'nullable',
-            'squat' => 'nullable',
+            'weight' => 'required|numeric|gt:0',
+            'benchpress' => 'nullable|numeric|gt:0',
+            'deadlift' => 'nullable|numeric|gt:0',
+            'squat' => 'nullable|numeric|gt:0',
             'comment' => 'required',
             'physique' => 'required',
             'physique.*' => 'image|mimes:jpeg,png,jpg,gif,svg'

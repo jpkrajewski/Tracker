@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class GoalController extends Controller
 {
-    use SoftDeletes;
 
     public function index()
     {
@@ -18,7 +17,7 @@ class GoalController extends Controller
         return view('goals.index', [
             'recentGoals' => $user->goals()->status('active')->get(),
             'finishedGoals' => $user->goals()->status('done')->get(),
-            'pussiedOutGoals' => $user->goals()->status('canceled')->get(),
+            'canceledGoals' => $user->goals()->status('canceled')->get(),
         ]);
     }
 
@@ -36,6 +35,11 @@ class GoalController extends Controller
     {
         $goal->fill($request->all());
         $goal->save();
+
+        if($request['status'] == 'canceled')
+        {
+            return redirect()->back();
+        }
 
         return redirect()->back()->withSuccess('Goal achieved. EASY.');
     }

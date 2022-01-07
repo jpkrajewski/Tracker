@@ -9,7 +9,7 @@ class PhysiqueProgressService
 {
 	private $strenghAttributes = array('weight' => 0,'benchpress' => 0,'deadlift' => 0,'squat' => 0);
 
-	public function getRecentProgress(int $userId): array
+	public function getRecentProgress(int $userId)
 	{
 		$reports = Physique::
 						userStrengh($userId)

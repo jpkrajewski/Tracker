@@ -20,7 +20,7 @@
                             <td>{{$physique->benchpress}}</td>
                             <td>{{$physique->deadlift}}</td>
                             <td>{{$physique->squat}}</td>
-                            <td>{{$physique->created_at->format('d-m-Y')}}</td>
+                            <td>{{$physique->created_at}}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header">
                     Write what's on your mind...
@@ -16,7 +16,9 @@
                     </form>
                 </div>
             </div>
-            <div class="card mt-4">
+        </div>
+        <div class="col-md-5">
+            <div class="card">
                 <div class="card-header">
                 	{{ $post->created_at->format('l d-m-Y') }}
                 </div>

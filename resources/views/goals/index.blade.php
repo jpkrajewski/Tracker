@@ -65,7 +65,7 @@
                             <th>#</th>
                             <th>Description</th>
                             <th>Finish date</th>
-                            <th>Time</th>
+                            <th>Time it took to get done</th>
                         </thead>
                         <tbody>
                             @foreach($finishedGoals as $key => $goal)
@@ -90,10 +90,10 @@
                     <table class="table text-white">
                         <thead>
                             <th>Description</th>
-                            <th>Pussied out date</th>
+                            <th>Cancel date</th>
                         </thead>
                         <tbody>
-                            @foreach($pussiedOutGoals as $goal)
+                            @foreach($canceledGoals as $goal)
                             <tr>
                                <td>{{ $goal->description }}</td>
                                <td>{{ $goal->updated_at }}</td>

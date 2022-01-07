@@ -24,13 +24,14 @@
                             </div>
                         </div>
 
+
                         <div class="row mb-3">
-                            <label for="deadlift" class="col-md-4 col-form-label text-md-end">{{ __('Deadlift') }}</label>
+                            <label for="benchpress" class="col-md-4 col-form-label text-md-end">{{ __('Benchpress') }}</label>
 
                             <div class="col-md-6">
-                                <input id="deadlift" type="number" min="40" step="1" class="form-control @error('deadlift') is-invalid @enderror" name="deadlift" value="{{ old('deadlift') }}" autocomplete="deadlift" autofocus>
+                                <input id="benchpress" type="number" min="0" step="1" class="form-control @error('benchpress') is-invalid @enderror" name="benchpress" value="{{ old('benchpress') }}" autocomplete="benchpress" autofocus>
 
-                                @error('deadlift')
+                                @error('benchpress')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -39,12 +40,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="benchpress" class="col-md-4 col-form-label text-md-end">{{ __('Benchpress') }}</label>
+                            <label for="deadlift" class="col-md-4 col-form-label text-md-end">{{ __('Deadlift') }}</label>
 
                             <div class="col-md-6">
-                                <input id="benchpress" type="number" min="40" step="1" class="form-control @error('benchpress') is-invalid @enderror" name="benchpress" value="{{ old('benchpress') }}" autocomplete="benchpress" autofocus>
+                                <input id="deadlift" type="number" min="0" step="1" class="form-control @error('deadlift') is-invalid @enderror" name="deadlift" value="{{ old('deadlift') }}" autocomplete="deadlift" autofocus>
 
-                                @error('benchpress')
+                                @error('deadlift')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -56,7 +57,7 @@
                             <label for="squat" class="col-md-4 col-form-label text-md-end">{{ __('Squat') }}</label>
 
                             <div class="col-md-6">
-                                <input id="squat" type="number" min="40" step="1" class="form-control @error('squat') is-invalid @enderror" name="squat" value="{{ old('squat') }}" autocomplete="squat" autofocus>
+                                <input id="squat" type="number" min="0" step="1" class="form-control @error('squat') is-invalid @enderror" name="squat" value="{{ old('squat') }}" autocomplete="squat" autofocus>
 
                                 @error('squat')
                                     <span class="invalid-feedback" role="alert">

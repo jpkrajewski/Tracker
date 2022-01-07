@@ -6,24 +6,30 @@ use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Carbon\CarbonImmutable;
-use Illuminate\Support\Facades\Http;
 
 class PostController extends Controller
 {   
 
     public function index()
     {
+        $id = auth()->user()->id;
         $now = CarbonImmutable::now();
-        $todayPost = Post::whereBetween('created_at', [$now->startOfDay(), $now->endOfDay()])->first();
+        $todayPost = Post::where('user_id', $id)->whereBetween('created_at', [$now->startOfDay(), $now->endOfDay()])->first();
+        $note = Post::where('user_id', $id)->latest()->first()->notes->reverse()->first();
+
         return view('posts.index', [
-            'posts' => Post::orderBy('created_at')->get(),
+            'posts' => Post::where('user_id', $id)->orderBy('created_at')->get(),
             'todayPost' => $todayPost,
+            'latestNote' => $note,
+            'user_id' => $id,
         ]);
     }
 
     public function store(StorePostRequest $request)
     {
-        $this->show(Post::create());
+        $post = Post::create($request->all());
+
+        return redirect()->route('posts.show', ['post' => $post])->withSuccess('Post created. Write.');
     }
 
     public function show(Post $post)
