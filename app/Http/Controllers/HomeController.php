@@ -3,26 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\Physique;
+use App\Models\Note;
+use App\Models\Earning;
+use App\Models\Goal;
+use App\Services\PhysiqueProgressService;
+
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    private $physiqueProgressService;
+
+    public function __construct(PhysiqueProgressService $service)
     {
-        $this->middleware('auth');
+        $this->physiqueProgressService = $service;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        return view('home');
+        $id = auth()->user()->id;
+
+        return view('home', [
+            'personalRecords' => $this->physiqueProgressService->getPersonalRecords($id),
+            'latestGoal' => Goal::where('user_id', $id)->latest()->first(),
+            'latestNotes' => Post::where('user_id', $id)->latest()->first()->notes->reverse(),
+        ]);
     }
 }

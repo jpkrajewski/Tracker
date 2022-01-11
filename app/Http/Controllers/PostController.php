@@ -15,12 +15,12 @@ class PostController extends Controller
         $id = auth()->user()->id;
         $now = CarbonImmutable::now();
         $todayPost = Post::where('user_id', $id)->whereBetween('created_at', [$now->startOfDay(), $now->endOfDay()])->first();
-        $note = Post::where('user_id', $id)->latest()->first()->notes->reverse()->first();
+        $notes = Post::where('user_id', $id)->latest()->first()->notes->reverse();
 
         return view('posts.index', [
-            'posts' => Post::where('user_id', $id)->orderBy('created_at')->get(),
+            'posts' => Post::where('user_id', $id)->orderBy('created_at', 'DESC')->get(),
             'todayPost' => $todayPost,
-            'latestNote' => $note,
+            'latestNotes' => $notes,
             'user_id' => $id,
         ]);
     }

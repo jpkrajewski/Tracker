@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\UserController::class,'index'])->name('index');
+Route::get('/', function()
+    {
+        return View::make('index');
+    });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -22,7 +25,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('notes', App\Http\Controllers\NoteController::class);
 	Route::resource('goals', App\Http\Controllers\GoalController::class);
 	Route::resource('profiles', App\Http\Controllers\ProfileController::class);
-	Route::resource('earnings', App\Http\Controllers\EarningController::class);
+	Route::resource('incomes', App\Http\Controllers\IncomeController::class);
 	Route::resource('physiques', App\Http\Controllers\PhysiqueController::class);
 });
 

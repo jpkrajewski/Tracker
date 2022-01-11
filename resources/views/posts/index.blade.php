@@ -40,14 +40,16 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    Latest note.
+                    Latest notes.
                 </div>
                 <div class="card-body">
-                    @if($latestNote)
+                    @if($latestNotes)
+                        @foreach($latestNotes as $note)
 
-                    <p>{{$latestNote->created_at}}</p>
-                    <p>{{$latestNote->content}}</p>
+                        <p>{{$note->created_at}}</p>
+                        <p>{{$note->content}}</p>
 
+                        @endforeach
                     @else
 
                     <p>No notes.</p>

@@ -6,6 +6,7 @@ use App\Models\Goal;
 use App\Http\Requests\StoreGoalRequest;
 use App\Http\Requests\UpdateGoalRequest;
 use Illuminate\Support\Facades\Auth;
+use Cache;
 
 class GoalController extends Controller
 {
@@ -14,10 +15,19 @@ class GoalController extends Controller
     {
         $user = Auth::user();
 
+        if (!Cache::has('goals'))
+        {
+            Cache::remember('goals', 15, function() use ($user){
+                    return $user->goals()->get();
+            }); 
+        }
+
+        $goals = Cache::get('goals')->reverse();
+
         return view('goals.index', [
-            'recentGoals' => $user->goals()->status('active')->get(),
-            'finishedGoals' => $user->goals()->status('done')->get(),
-            'canceledGoals' => $user->goals()->status('canceled')->get(),
+            'activeGoals' => $goals->where('status', 'active'),
+            'finishedGoals' => $goals->where('status','done'),
+            'canceledGoals' => $goals->where('status','canceled'),
         ]);
     }
 

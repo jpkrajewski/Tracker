@@ -29,7 +29,7 @@
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            @foreach($recentGoals as $goal)
+                            @foreach($activeGoals as $goal)
                             <tr>
                                 <td>{{ $goal->description }}</td>
                                 <td>{{ $goal->created_at }}</td>
@@ -91,12 +91,21 @@
                         <thead>
                             <th>Description</th>
                             <th>Cancel date</th>
+                            <th>Delete disappointment</th>
                         </thead>
                         <tbody>
                             @foreach($canceledGoals as $goal)
                             <tr>
-                               <td>{{ $goal->description }}</td>
-                               <td>{{ $goal->updated_at }}</td>
+                                <td>{{ $goal->description }}</td>
+                                <td>{{ $goal->updated_at }}</td>
+                                <td>
+                                    <form method="POST" action="{{ route('goals.destroy', ['goal' => $goal->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input value="canceled" name="status" hidden>
+                                        <button class="btn btn-danger " type="submit">Cancel.</button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
